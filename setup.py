@@ -23,7 +23,8 @@ def makeExtension(extName):
         [extPath],
         # your include_dirs must contains the '.' for setup to search all the
         # subfolder of the codeRootFolder
-        include_dirs=['.', 'numpy.get_include()'],
+        include_dirs=['.', numpy.get_include(), '/usr/local/opt/llvm/include'],
+        library_dirs=['/usr/local/opt/llvm/lib'],
         extra_compile_args=["-O3", "-fopenmp", "-ffast-math", "-finline-functions", "-Wno-cpp", "-Wunused-but-set-variable"],
         extra_link_args=['-fopenmp', "-finline-functions"]
     )
@@ -35,7 +36,8 @@ extensions = [makeExtension(name) for name in extNames]
 
 extensions.append(Extension('lib._tifffile',
                             [os.path.join("lib", 'tifffile.c')],
-                            include_dirs=['.', 'numpy.get_include()'],
+                            include_dirs=['.', numpy.get_include(), '/usr/local/opt/llvm/include'],
+                            library_dirs=['/usr/local/opt/llvm/lib'],
                             extra_compile_args=["-O3", "-fopenmp", "-ffast-math", "-finline-functions", "-Wno-cpp", "-Wunused-but-set-variable"],
                             extra_link_args=['-fopenmp', "-finline-functions"]
                             ))
